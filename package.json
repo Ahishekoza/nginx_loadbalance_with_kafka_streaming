@@ -6,13 +6,15 @@
   "type": "module",
   "scripts": {
     "start": "nodemon ./src/index.js",
-    "prod": "node  ./src/index.js"
+    "prod": "node  ./src/index.js",
+    "start:logs": "node ./src-logs/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "kafkajs": "^2.2.4",
     "mongoose": "^8.8.3",
