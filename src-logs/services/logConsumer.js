@@ -1,17 +1,18 @@
-import { consumer } from "../config/kafka.js";
+
+import { consumer1 } from "../config/kafka.js";
 import { saveLogsInDatabase } from "../controllers/log.controller.js";
 
 const consumingLogsToDatabase = async () => {
-  await consumer.connect();
+  // const consumer = kafka.consumer({groupId:'logs-reading-group'})
+  await consumer1.connect();
 
-  await consumer.subscribe({ topic: "web_logs", fromBeginning: true });
+  await consumer1.subscribe({ topic: "web_logs", fromBeginning: true });
 
-  await consumer.run({
+  await consumer1.run({
     eachMessage: async ({ message }) => {
       try {
         const log = JSON.parse(message.value.toString());
         
-        console.log(log);
         await saveLogsInDatabase(log)
       } catch (err) {
         console.error("Error processing message:", err.message);
@@ -22,7 +23,7 @@ const consumingLogsToDatabase = async () => {
 
   process.on("SIGINT", async () => {
     console.log("Disconnecting Kafka consumer...");
-    await consumer.disconnect();
+    await consumer1.disconnect();
     process.exit(0);
   });
 };
