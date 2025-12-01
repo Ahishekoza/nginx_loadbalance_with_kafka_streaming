@@ -7,5 +7,5 @@ COPY package*.json ./
 RUN npm install --legacy-peer-deps
 
 COPY . .
-
+# CMD
 CMD [ "npm","run","start:logs" ]
